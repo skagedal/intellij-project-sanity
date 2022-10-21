@@ -9,5 +9,9 @@ applications – when pressing the "stop" button, it will just kill the process.
 
 I also tend to frequently create or recreate IDEA projects. The result is that I often need to go into these settings
 ("Preferences" -> "Gradle") and change both "Build and run using:" and "Run tests using:". That is annoying. This tool
-does the work for me. 
+does the work for me.
 
+## Notes
+
+Any run configurations that you create while in run-with-Gradle mode will stay as such. You'll have to remove them and
+recreate them.
