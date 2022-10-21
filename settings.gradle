@@ -1,0 +1,4 @@
+rootProject.name = 'intellij-project-sanity'
+
+include('app')
+project(":app").name = 'intellij-project-sanity'
