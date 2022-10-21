@@ -1,23 +1,27 @@
 package tech.skagedal.intellij;
 
-import java.awt.event.WindowStateListener;
 import java.util.Objects;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class GradleXmlConverter {
   public void convert(Document document) {
     removeTextNodes(document.getDocumentElement());
 
     if (getFirstNodeByTagName(document) instanceof Element settingsElement) {
-      // Setting "delegatedBuild" to "false" makes the setting "Build and run using:" to be "IntelliJ"
-      findOrCreateOptionElement(document, settingsElement, "delegatedBuild")
-          .setAttribute("value", "false");
+      // This makes the setting "Build and run using:" to be "IntelliJ"
+      setOption(document, settingsElement, "delegatedBuild", "false");
+      // This makes the setting "Run tests using:" to be "IntelliJ"
+      setOption(document, settingsElement, "testRunner", "PLATFORM");
     } else {
       throw new GradleXmlException("Did not find element GradleProjectSettings");
     }
+  }
+
+  private void setOption(Document document, Element settingsElement, String name, String value) {
+    findOrCreateOptionElement(document, settingsElement, name)
+        .setAttribute("value", value);
   }
 
   private static Node getFirstNodeByTagName(Document document) {
